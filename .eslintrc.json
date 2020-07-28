@@ -1,7 +1,8 @@
 {
     "env": {
         "es2020": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": [
         "airbnb-base",
@@ -13,5 +14,6 @@
     },
     "rules": {
     },
-    "ignorePatterns": "dist"
+    "ignorePatterns": "dist",
+    "plugins": ["jest"]
 }
