@@ -1,5 +1,6 @@
 import { users } from "../../models";
 import * as helpers from "../../helpers";
+import { ExposableError } from "../../classes/errros";
 
 /**
  * @swagger
@@ -18,7 +19,7 @@ import * as helpers from "../../helpers";
  *      - in: body
  *        name: body
  *        required: true
- *        description: The body of request for user registration
+ *        description: The user login request body
  *        schema:
  *          type: object
  *          required:
@@ -36,5 +37,11 @@ import * as helpers from "../../helpers";
 export const login = ({ email, password }) =>
   users
     .findOne({ email })
-    .then((user) => ({ user, valid: helpers.password.verify(password, user.password) }))
-    .then(({ user, valid }) => (valid ? helpers.jwt.sign(user) : Promise.reject(new Error("Invalid password"))));
+    .catch((err) => Promise.reject(new ExposableError(err.message)))
+    .then((user) => user || Promise.reject(new ExposableError("Acess denied")))
+
+    .then((user) => ({ user: user.toJSON(), valid: helpers.password.verify(password, user.password) }))
+    .catch((err) => Promise.reject(new ExposableError(err.message)))
+
+    .then(({ user, valid }) => (valid ? helpers.jwt.sign(user) : Promise.reject(new ExposableError("Acess denied"))))
+    .catch((err) => Promise.reject(new ExposableError(err.message)));

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import compression from "compression";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import { errorHandler } from "../helpers/error-handler";
 import * as apis from "../apis";
 
 const app = express();
@@ -14,9 +15,6 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(compression());
-
-app.use(apis.root.router);
-app.use("/users", apis.users.router);
 
 const swaggerSpec = swaggerJSDoc({
   definition: {
@@ -30,19 +28,23 @@ const swaggerSpec = swaggerJSDoc({
         in: "header",
         name: "Authorization",
         type: "apiKey",
-      }
+      },
     },
     security: [
       {
-        bearerAuth: []
-      }
-    ]
+        bearerAuth: [],
+      },
+    ],
   },
-  apis: ["./src/apis/**/*.js"]
+  apis: ["./src/apis/**/*.js"],
 });
 
 app.get("/api-docs.json", (req, res) => res.json(swaggerSpec));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.use(apis.root.router);
+app.use("/users", apis.users.router);
+
+app.use(errorHandler);
 
 export const start = () => new Promise((resolve) => app.listen(process.env.PORT || 3000, () => resolve(app)));

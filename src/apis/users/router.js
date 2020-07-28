@@ -1,25 +1,24 @@
 import { Router } from "express";
-import { errorHandler } from "../../helpers/error-handler";
 import { register } from "./register";
 import { login } from "./login";
 
 export const router = Router();
 
-router.post("/register", (req, res) =>
+router.post("/register", (req, res, next) =>
   register({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
   })
     .then((data) => res.json(data))
-    .catch(errorHandler)
+    .catch(next)
 );
 
-router.post("/login", (req, res) =>
+router.post("/login", (req, res, next) =>
   login({
     email: req.body.email,
     password: req.body.password,
   })
     .then((data) => res.json(data))
-    .catch(errorHandler)
+    .catch(next)
 );

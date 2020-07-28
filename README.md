@@ -25,6 +25,7 @@
 * POST /users/login
 * GET /users/logins
 
+## Technical Debits
 
-registrando 2x tem que responder erro legal para front-end
-login
+* @rootImport
+* write unit test for register, login (i should have done that before...)

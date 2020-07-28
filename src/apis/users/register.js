@@ -1,5 +1,6 @@
 import { users } from "../../models";
 import * as helpers from "../../helpers";
+import * as classes from "../../classes";
 
 /**
  * @swagger
@@ -18,7 +19,7 @@ import * as helpers from "../../helpers";
  *      - in: body
  *        name: body
  *        required: true
- *        description: The body of user registration request
+ *        description: The user registration request body
  *        schema:
  *          type: object
  *          required:
@@ -44,4 +45,5 @@ export const register = async ({ name, email, password }) =>
       email,
       password: await helpers.password.encrypt(password),
     })
+    .catch((err) => Promise.reject(new classes.errors.ExposableError(err.message)))
     .then((user) => helpers.jwt.sign(user.toJSON()));
