@@ -1,0 +1,12 @@
+{
+  "name": "nodejs-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fernandobhz/nodejs-boilerplate.git",
+  "author": "Fernando Reis Guimarães <fernandobhz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "^14.2.0"
+  }
+}
