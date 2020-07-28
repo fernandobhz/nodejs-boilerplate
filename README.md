@@ -7,11 +7,20 @@
 * Prettier
 * Editorconfig
 * Jest
+* Jsdoc swagger
 
 ## Structure
 
+* apis
+* classes
+  - errors
 * core
-* middlewares
+* helpers
 * models
-* rules
-* services
+
+## Routes
+
+* GET /
+* POST /users/register
+* POST /users/login
+* GET /users/logins
