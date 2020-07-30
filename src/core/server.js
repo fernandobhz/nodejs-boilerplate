@@ -47,4 +47,4 @@ app.use("/users", apis.users.router);
 
 app.use(errorHandler);
 
-export const start = () => new Promise((resolve) => app.listen(process.env.PORT || 3000, () => resolve(app)));
+export const start = () => new Promise(resolve => app.listen(process.env.PORT || 3000, () => resolve(app)));

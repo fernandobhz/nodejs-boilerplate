@@ -45,5 +45,5 @@ export const register = async ({ name, email, password }) =>
       email,
       password: await helpers.password.encrypt(password),
     })
-    .catch((err) => Promise.reject(new classes.errors.ExposableError(err.message)))
-    .then((user) => helpers.jwt.sign(user.toJSON()));
+    .catch(err => Promise.reject(new classes.errors.ExposableError(err.message)))
+    .then(user => helpers.jwt.sign(user.toJSON()));

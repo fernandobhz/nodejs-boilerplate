@@ -37,16 +37,16 @@ import { ExposableError } from "../../classes/errros";
 export const closeAccount = ({ email, password }) =>
   users
     .findOne({ email })
-    .catch((err) => Promise.reject(new ExposableError(err.message)))
-    .then((user) => user || Promise.reject(new ExposableError("Acess denied")))
+    .catch(err => Promise.reject(new ExposableError(err.message)))
+    .then(user => user || Promise.reject(new ExposableError("Acess denied")))
 
-    .then((user) =>
+    .then(user =>
       helpers.password
         .verify(password, user.password)
-        .catch((err) => Promise.reject(new ExposableError(err.message)))
+        .catch(err => Promise.reject(new ExposableError(err.message)))
 
-        .then((isValid) =>
+        .then(isValid =>
           isValid ? users.findOneAndDelete({ email }) : Promise.reject(new ExposableError("Acess denied"))
         )
-        .catch((err) => Promise.reject(new ExposableError(err.message)))
+        .catch(err => Promise.reject(new ExposableError(err.message)))
     );

@@ -12,7 +12,7 @@ router.post("/register", (req, res, next) =>
     email: req.body.email,
     password: req.body.password,
   })
-    .then((data) => res.json(data))
+    .then(data => res.json(data))
     .catch(next)
 );
 
@@ -21,7 +21,7 @@ router.post("/login", (req, res, next) =>
     email: req.body.email,
     password: req.body.password,
   })
-    .then((data) => res.json(data))
+    .then(data => res.json(data))
     .catch(next)
 );
 
@@ -30,6 +30,6 @@ router.post("/close-account", auth, (req, res, next) =>
     email: req.body.email,
     password: req.body.password,
   })
-    .then((data) => res.json(data))
+    .then(data => res.json(data))
     .catch(next)
 );

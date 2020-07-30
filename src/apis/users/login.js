@@ -37,11 +37,11 @@ import { ExposableError } from "../../classes/errros";
 export const login = ({ email, password }) =>
   users
     .findOne({ email })
-    .catch((err) => Promise.reject(new ExposableError(err.message)))
-    .then((user) => user || Promise.reject(new ExposableError("Access denied")))
+    .catch(err => Promise.reject(new ExposableError(err.message)))
+    .then(user => user || Promise.reject(new ExposableError("Access denied")))
 
-    .then((user) => ({ user: user.toJSON(), valid: helpers.password.verify(password, user.password) }))
-    .catch((err) => Promise.reject(new ExposableError(err.message)))
+    .then(user => ({ user: user.toJSON(), valid: helpers.password.verify(password, user.password) }))
+    .catch(err => Promise.reject(new ExposableError(err.message)))
 
     .then(({ user, valid }) => (valid ? helpers.jwt.sign(user) : Promise.reject(new ExposableError("Access denied"))))
-    .catch((err) => Promise.reject(new ExposableError(err.message)));
+    .catch(err => Promise.reject(new ExposableError(err.message)));
