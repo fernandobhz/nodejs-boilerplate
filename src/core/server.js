@@ -5,7 +5,7 @@ import morgan from "morgan";
 import compression from "compression";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import { errorHandler } from "../helpers/error-handler";
+import { errorHandler } from "./error-handler";
 import * as apis from "../apis";
 
 const app = express();
