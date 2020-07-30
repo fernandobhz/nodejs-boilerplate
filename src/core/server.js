@@ -5,7 +5,7 @@ import morgan from "morgan";
 import compression from "compression";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import { errorHandler } from "../helpers/error-handler";
+import { errorHandler } from "./error-handler";
 import * as apis from "../apis";
 
 const app = express();
@@ -47,4 +47,4 @@ app.use("/users", apis.users.router);
 
 app.use(errorHandler);
 
-export const start = () => new Promise((resolve) => app.listen(process.env.PORT || 3000, () => resolve(app)));
+export const start = () => new Promise(resolve => app.listen(process.env.PORT || 3000, () => resolve(app)));

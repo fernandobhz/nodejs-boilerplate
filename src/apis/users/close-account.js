@@ -5,11 +5,11 @@ import { ExposableError } from "../../classes/errros";
 /**
  * @swagger
  *
- * /users/login:
+ * /users/close-account:
  *  post:
  *    tags:
  *      - Users
- *    description: Login user
+ *    description: Close user account
  *    produces:
  *      - application/json
  *    responses:
@@ -19,7 +19,7 @@ import { ExposableError } from "../../classes/errros";
  *      - in: body
  *        name: body
  *        required: true
- *        description: The user login request body
+ *        description: The close account request body, request password again preventing xss
  *        schema:
  *          type: object
  *          required:
@@ -34,14 +34,19 @@ import { ExposableError } from "../../classes/errros";
  *              example: "12345678"
  */
 
-export const login = ({ email, password }) =>
+export const closeAccount = ({ email, password }) =>
   users
     .findOne({ email })
     .catch(err => Promise.reject(new ExposableError(err.message)))
-    .then(user => user || Promise.reject(new ExposableError("Access denied")))
+    .then(user => user || Promise.reject(new ExposableError("Acess denied")))
 
-    .then(user => ({ user: user.toJSON(), valid: helpers.password.verify(password, user.password) }))
-    .catch(err => Promise.reject(new ExposableError(err.message)))
+    .then(user =>
+      helpers.password
+        .verify(password, user.password)
+        .catch(err => Promise.reject(new ExposableError(err.message)))
 
-    .then(({ user, valid }) => (valid ? helpers.jwt.sign(user) : Promise.reject(new ExposableError("Access denied"))))
-    .catch(err => Promise.reject(new ExposableError(err.message)));
+        .then(isValid =>
+          isValid ? users.findOneAndDelete({ email }) : Promise.reject(new ExposableError("Acess denied"))
+        )
+        .catch(err => Promise.reject(new ExposableError(err.message)))
+    );
