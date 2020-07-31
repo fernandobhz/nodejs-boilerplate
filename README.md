@@ -67,6 +67,5 @@
 
 
 ## Decide TODO
----
 
 * joi schemas? joischema infile (file should be small)? joi2swagger? both on the same file?
