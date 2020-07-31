@@ -27,7 +27,6 @@
 * POST /users/close-account
 
 ## Todo
-* debugger
 
 * jest tests
 
