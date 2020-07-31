@@ -9,12 +9,13 @@
 * Jest
 * Jsdoc
 * Swagger
+* Vscode Program Debugger
+* VScode Jest Debugger
 
 ## Structure
 
 * apis
 * classes
-  - errors
 * core
 * helpers
 * models
@@ -26,7 +27,11 @@
 * POST /users/login
 * POST /users/close-account
 
-## Todo
+---
+
+## Back-end TODO
+
+* .test.js
 
 * jest tests
 
@@ -39,10 +44,15 @@
 
 * framework de log? logger?
 
+
+## DevOps TODO
 ---
 
 * ci/cd  ==> heroku
+* container to be possible to deploy on kubernets
 
+
+## Front-end TODO
 ---
 
 * front-end
@@ -59,3 +69,9 @@
     * my profile editable
 
   - side tree menu
+
+
+## Decide TODO
+---
+
+* joi schemas? joischema infile (file should be small)? joi2swagger? both on the same file?
