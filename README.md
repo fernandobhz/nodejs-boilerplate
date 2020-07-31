@@ -27,13 +27,10 @@
 * POST /users/login
 * POST /users/close-account
 
----
 
 ## Back-end TODO
 
-* .test.js
-
-* jest tests
+* jest.test.js
 
 * InternalError
   - errorHandler
@@ -46,14 +43,12 @@
 
 
 ## DevOps TODO
----
 
 * ci/cd  ==> heroku
 * container to be possible to deploy on kubernets
 
 
 ## Front-end TODO
----
 
 * front-end
   - login page
