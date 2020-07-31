@@ -7,7 +7,8 @@
 * Prettier
 * Editorconfig
 * Jest
-* Jsdoc swagger
+* Jsdoc
+* Swagger
 
 ## Structure
 
@@ -23,4 +24,4 @@
 * GET /
 * POST /users/register
 * POST /users/login
-* GET /users/logins
+* POST /users/close-account
