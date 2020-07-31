@@ -7,7 +7,8 @@
 * Prettier
 * Editorconfig
 * Jest
-* Jsdoc swagger
+* Jsdoc
+* Swagger
 
 ## Structure
 
@@ -23,4 +24,39 @@
 * GET /
 * POST /users/register
 * POST /users/login
-* GET /users/logins
+* POST /users/close-account
+
+## Todo
+* debugger
+
+* jest tests
+
+* InternalError
+  - errorHandler
+    * try to log error on database
+    * output to console
+      - curl
+      - stack trace
+
+* framework de log? logger?
+
+---
+
+* ci/cd  ==> heroku
+
+---
+
+* front-end
+  - login page
+
+  - register page
+
+  - layout template
+
+  - user top-right avatar menu
+
+    * logout
+
+    * my profile editable
+
+  - side tree menu
