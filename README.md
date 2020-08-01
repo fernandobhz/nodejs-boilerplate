@@ -69,7 +69,7 @@ build curl of who called me
 
 ## Decide TODO
 
-* joi schemas? joischema infile (file should be small)? joi2swagger? both on the same file?
+migrate from swagger to openApi
 
 https://www.npmjs.com/package/swagger-express-validator
 
