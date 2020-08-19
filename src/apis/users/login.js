@@ -1,6 +1,5 @@
-import { users } from "../../models";
+import * as models from "../../models";
 import * as helpers from "../../helpers";
-import { ExposableError } from "../../classes/errros";
 
 /**
  * @swagger
@@ -34,14 +33,10 @@ import { ExposableError } from "../../classes/errros";
  *              example: "12345678"
  */
 
-export const login = ({ email, password }) =>
-  users
-    .findOne({ email })
-    .catch(err => Promise.reject(new ExposableError(err.message)))
-    .then(user => user || Promise.reject(new ExposableError("Access denied")))
+export const login = async ({ email, password }) => {
+  const user = await models.users.findOne({ email });
+  await helpers.password.verify(password, user.password);
 
-    .then(user => ({ user: user.toJSON(), valid: helpers.password.verify(password, user.password) }))
-    .catch(err => Promise.reject(new ExposableError(err.message)))
-
-    .then(({ user, valid }) => (valid ? helpers.jwt.sign(user) : Promise.reject(new ExposableError("Access denied"))))
-    .catch(err => Promise.reject(new ExposableError(err.message)));
+  const { name } = user;
+  return helpers.jwt.sign({ name, email });
+};

@@ -23,54 +23,14 @@
 ## Routes
 
 * GET /
+* GET /api-docs
 * POST /users/register
 * POST /users/login
 * POST /users/close-account
 
-
-## Back-end TODO
+## TODO
 
 * jest.test.js
+* log requests and responses with request curl
+* https://www.npmjs.com/package/express-openapi-validator
 
-* InternalError
-  - errorHandler
-    * try to log error on database
-    * output to console
-      - curl
-      - stack trace
-
-* framework de log? logger?
-
-build curl of who called me
-
-## DevOps TODO
-
-* ci/cd  ==> heroku
-* container to be possible to deploy on kubernets
-
-
-## Front-end TODO
-
-* front-end
-  - login page
-
-  - register page
-
-  - layout template
-
-  - user top-right avatar menu
-
-    * logout
-
-    * my profile editable
-
-  - side tree menu
-
-
-## Decide TODO
-
-migrate from swagger to openApi
-
-https://www.npmjs.com/package/swagger-express-validator
-
-https://www.npmjs.com/package/express-openapi-validator
