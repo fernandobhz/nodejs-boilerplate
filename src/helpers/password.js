@@ -1,5 +1,10 @@
 import bcrypt from "bcrypt";
+import { UnauthorizedError } from "../classes/errors";
+import { BCRYPT_ROUNDS } from "../core/config";
 
-export const encrypt = async password => bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS || 10));
+export const encrypt = password => bcrypt.hash(password, BCRYPT_ROUNDS);
 
-export const verify = async (password, hashed) => bcrypt.compare(password, hashed);
+export const verify = async (password, hashed) => {
+  const isValid = await bcrypt.compare(password, hashed);
+  if (!isValid) throw new UnauthorizedError();
+};

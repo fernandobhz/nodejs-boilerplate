@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 import "dotenv/config";
-import { start } from "./core/server";
+import { app } from "./core/app";
 import { connect } from "./core/database";
+import { PORT } from "./core/config";
 
 (async function main() {
   console.log(new Date(), "Initializing...");
   try {
     await connect();
-    await start();
-    console.log(new Date(), `Server up at port ${process.env.PORT}`);
+    app.listen(PORT, () => console.log(new Date(), `Server up at port ${PORT}`));
   } catch (error) {
     console.error("Failed to start application", error);
   }

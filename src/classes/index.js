@@ -1,3 +1,3 @@
-import * as errors from "./errros";
+import * as errors from "./errors";
 
 export { errors };

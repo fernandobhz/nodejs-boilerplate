@@ -1,5 +1,5 @@
 import * as helpers from "../helpers";
-import { ExposableError } from "../classes/errros";
+import { ExposableError } from "../classes/errors";
 
 export function auth(req, res, next) {
   const { authorization } = req.headers;

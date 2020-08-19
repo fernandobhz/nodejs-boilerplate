@@ -1,6 +1,5 @@
-import { users } from "../../models";
+import * as models from "../../models";
 import * as helpers from "../../helpers";
-import * as classes from "../../classes";
 
 /**
  * @swagger
@@ -38,12 +37,12 @@ import * as classes from "../../classes";
  *              example: "12345678"
  */
 
-export const register = async ({ name, email, password }) =>
-  users
-    .create({
-      name,
-      email,
-      password: await helpers.password.encrypt(password),
-    })
-    .catch(err => Promise.reject(new classes.errors.ExposableError(err.message)))
-    .then(user => helpers.jwt.sign(user.toJSON()));
+export const register = async ({ name, email, password }) => {
+  await models.users.create({
+    name,
+    email,
+    password: await helpers.password.encrypt(password),
+  });
+
+  return helpers.jwt.sign(JSON.stringify({ name, email }));
+};

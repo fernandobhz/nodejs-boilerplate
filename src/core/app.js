@@ -8,7 +8,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import { errorHandler } from "./error-handler";
 import * as apis from "../apis";
 
-const app = express();
+export const app = express();
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -41,10 +41,6 @@ const swaggerSpec = swaggerJSDoc({
 
 app.get("/api-docs.json", (req, res) => res.json(swaggerSpec));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-app.use(apis.root.router);
+app.get("/", (req, res) => res.redirect("/api-docs"));
 app.use("/users", apis.users.router);
-
 app.use(errorHandler);
-
-export const start = () => new Promise(resolve => app.listen(process.env.PORT || 3000, () => resolve(app)));

@@ -1,6 +1,5 @@
-import { users } from "../../models";
+import * as models from "../../models";
 import * as helpers from "../../helpers";
-import { ExposableError } from "../../classes/errros";
 
 /**
  * @swagger
@@ -34,19 +33,8 @@ import { ExposableError } from "../../classes/errros";
  *              example: "12345678"
  */
 
-export const closeAccount = ({ email, password }) =>
-  users
-    .findOne({ email })
-    .catch(err => Promise.reject(new ExposableError(err.message)))
-    .then(user => user || Promise.reject(new ExposableError("Acess denied")))
-
-    .then(user =>
-      helpers.password
-        .verify(password, user.password)
-        .catch(err => Promise.reject(new ExposableError(err.message)))
-
-        .then(isValid =>
-          isValid ? users.findOneAndDelete({ email }) : Promise.reject(new ExposableError("Acess denied"))
-        )
-        .catch(err => Promise.reject(new ExposableError(err.message)))
-    );
+export const closeAccount = async ({ email, password }) => {
+  const user = await models.users.findOne({ email });
+  await helpers.password.verify(password, user.password);
+  await models.users.findOneAndDelete({ email });
+};
