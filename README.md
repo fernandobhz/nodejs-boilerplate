@@ -12,6 +12,12 @@
 * Vscode Program Debugger
 * VScode Jest Debugger
 
+
+## Please keep using
+
+* git flow
+* conventional commits (feat, fix, refactor, chore, docs, sytle, perf, vendor, test, etc..)
+
 ## Structure
 
 * apis
