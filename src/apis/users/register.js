@@ -8,7 +8,7 @@ import * as helpers from "../../helpers";
  *  post:
  *    tags:
  *      - Users
- *    description: Register a user
+ *    description: Register an user
  *    produces:
  *      - application/json
  *    responses:
