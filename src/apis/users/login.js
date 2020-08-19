@@ -1,5 +1,6 @@
 import * as models from "../../models";
 import * as helpers from "../../helpers";
+import { UnauthorizedError } from "../../classes/errors";
 
 /**
  * @swagger
@@ -35,7 +36,10 @@ import * as helpers from "../../helpers";
 
 export const login = async ({ email, password }) => {
   const user = await models.users.findOne({ email });
-  await helpers.password.verify(password, user.password);
+  if (!user) throw new UnauthorizedError();
+
+  const isValid = await helpers.password.verify(password, user.password);
+  if (!isValid) throw new UnauthorizedError();
 
   const { name } = user;
   return helpers.jwt.sign({ name, email });
